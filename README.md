@@ -1,4 +1,4 @@
-# ARCHEON v1.4
+# ARCHEON v1.5
 
 **Autonomous Research, Cognition & Hyper-Execution Operating Network**
 
@@ -6,6 +6,12 @@ ARCHEON is an experimental agent operating system that combines multi-model reas
 
 > **Core rule:** intelligence is not authority. Models may propose actions; permission, risk, approval, and platform boundaries decide whether an action is allowed.
 
+
+## v1.5 Autonomous Cognition
+
+ARCHEON can now run bounded proactive cognition cycles: curiosity, reflection, goal generation, calibrated beliefs, an Inner Thought Queue, idle/night maintenance, and an optional local cognition worker. Autonomy is disabled by default and controlled by an Authority Governor; approval-gated actions, live trading, permission grants, secret access, production writes, medical treatment, and self-merge remain outside self-authorization.
+
+See `ARCHEON_V15.md`.
 
 ## v1.4 Mission Control
 
@@ -156,7 +162,7 @@ ARCHEON intentionally does **not** equate model intelligence with unrestricted m
 
 ```powershell
 Copy-Item .env.example .env.local
-.\SETUP_V14.ps1
+.\SETUP_V15.ps1
 npm install
 npm run dev:lan
 ```
