@@ -23,6 +23,7 @@ import { telegramSend } from "./telegram";
 import { executeReachTool } from "./reach/tools";
 import { traceEvent } from "./tracing";
 import { executeCoreTool } from "./core/tools";
+import { securityState } from "./core/security-state";
 
 const execFileAsync = promisify(execFile);
 
@@ -57,6 +58,16 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   { name: "core.computer.screenshot", risk: "approval", description: "Capture the primary Windows screen to a local data/screenshots file. Requires explicit approval.", args: '{}' },
   { name: "core.mesh.workers", risk: "read", description: "List online Device Mesh nodes that can act as distributed workers.", args: '{}' },
   { name: "core.mesh.dispatch", risk: "approval", description: "Dispatch a bounded capability-scoped work item to one paired online device.", args: '{"deviceId":"...","jobType":"...","payload":{},"requiredCapability":"..."}' },
+  { name: "core.security.status", risk: "read", description: "Read the global ARCHEON security/lockdown state.", args: '{}' },
+  { name: "core.security.lockdown", risk: "approval", description: "Enable or disable global lockdown. While enabled, approval-gated actions are denied except this control.", args: '{"enabled":true,"reason":"..."}' },
+  { name: "core.claim.add", risk: "approval", description: "Persist a provenance-aware research claim with source classes, confidence and contradiction links.", args: '{"text":"...","sourceRefs":["..."],"sourceTypes":["paper"],"confidence":0.8}' },
+  { name: "core.claim.search", risk: "read", description: "Search the local evidence/claim graph with confidence and source-independence signals.", args: '{"query":"...","limit":20}' },
+  { name: "core.book.analyze", risk: "read", description: "Extract chapter-like headings and high-frequency concepts from authorized book text.", args: '{"title":"...","text":"..."}' },
+  { name: "core.portfolio.analyze", risk: "read", description: "Analyze multi-asset return correlations, weighted portfolio volatility and extremes for research.", args: '{"series":{"XAUUSD":[0.01],"BTCUSD":[0.02]},"weights":{"XAUUSD":0.5,"BTCUSD":0.5}}' },
+  { name: "core.microstructure.analyze", risk: "read", description: "Calculate VWAP, range, spread and optional buy/sell volume imbalance from tick-like data.", args: '{"ticks":[{"price":100,"volume":1,"side":"buy","spread":0.1}]}' },
+  { name: "core.coding.workflow", risk: "read", description: "Build a gated architect→coder→QA→security→owner coding workflow for an objective.", args: '{"objective":"...","repo":"optional","deploy":false}' },
+  { name: "core.vision.plan", risk: "read", description: "Plan a permission-separated vision task for screenshot, phone camera, Meta camera or file input.", args: '{"source":"screenshot","goal":"inspect UI"}' },
+  { name: "core.iot.plan", risk: "read", description: "Prepare but do not execute an HTTPS Home Assistant service request with explicit security prerequisites.", args: '{"baseUrl":"https://home.example","domain":"light","service":"turn_on","entityId":"light.office"}' },
   { name: "reach.doctor", risk: "read", description: "Probe JARVIS internet capability channels and choose the first healthy backend for each channel.", args: "{}" },
   { name: "reach.route", risk: "read", description: "Route a URL to the matching Reach channel and ordered backend candidates.", args: '{"url":"https://..."}' },
   { name: "reach.agentReach.doctor", risk: "read", description: "Run Agent-Reach doctor --json when its CLI is installed.", args: "{}" },
@@ -722,6 +733,10 @@ export async function prepareToolApproval(call: ToolCall): Promise<{ call: ToolC
 export async function executeTool(call: ToolCall): Promise<ToolExecutionResult> {
   const definition = getToolDefinition(call.tool);
   if (!definition) return { ok: false, tool: call.tool, summary: "Unknown tool.", error: "Unknown tool." };
+  const security = await securityState();
+  if (security.lockdown && definition.risk === "approval" && call.tool !== "core.security.lockdown") {
+    return { ok: false, tool: call.tool, summary: "Global lockdown is active; approval-gated actions are disabled.", error: "lockdown" };
+  }
   const traceStarted=Date.now();
   await audit({ event: "tool.start", tool: call.tool, detail: call.reason?.slice(0, 300) });
   await traceEvent({kind:"tool.start",tool:call.tool,status:"running",meta:{reason:call.reason?.slice(0,300)}});
