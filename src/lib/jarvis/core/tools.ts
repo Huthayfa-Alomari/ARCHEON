@@ -11,6 +11,14 @@ import { commandCenterStatus } from "./command-center";
 import { computerStatus,captureScreenshot } from "./computer";
 import { meshWorkers,dispatchMeshWork } from "./distributed";
 import { listPendingApprovals } from "../approvals";
+import { securityState,setLockdown } from "./security-state";
+import { addClaim,searchClaims } from "../research/claim-graph";
+import { analyzeBookText } from "../knowledge/book-intelligence";
+import { analyzePortfolio } from "../trading/portfolio";
+import { microstructureFeatures } from "../trading/microstructure";
+import { codingWorkflow } from "./coding-agent";
+import { homeAssistantRequest } from "./iot";
+import { visionTask } from "./vision";
 const ok=(tool:string,data:unknown):ToolExecutionResult=>({ok:true,tool,summary:JSON.stringify(data,null,2),data});
 export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult>{
  const a=call.args as any;
@@ -38,5 +46,15 @@ export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult
  case"core.computer.screenshot":return ok(call.tool,await captureScreenshot());
  case"core.mesh.workers":return ok(call.tool,await meshWorkers());
  case"core.mesh.dispatch":return ok(call.tool,await dispatchMeshWork(a));
+ case"core.security.status":return ok(call.tool,await securityState());
+ case"core.security.lockdown":return ok(call.tool,await setLockdown(Boolean(a.enabled),a.reason?String(a.reason):undefined));
+ case"core.claim.add":return ok(call.tool,await addClaim(a));
+ case"core.claim.search":return ok(call.tool,await searchClaims(String(a.query||""),Number(a.limit||20)));
+ case"core.book.analyze":return ok(call.tool,analyzeBookText(a));
+ case"core.portfolio.analyze":return ok(call.tool,analyzePortfolio(a));
+ case"core.microstructure.analyze":return ok(call.tool,microstructureFeatures(a));
+ case"core.coding.workflow":return ok(call.tool,codingWorkflow(a));
+ case"core.iot.plan":return ok(call.tool,homeAssistantRequest(a));
+ case"core.vision.plan":return ok(call.tool,visionTask(a));
  default:return{ok:false,tool:call.tool,summary:"Core v1.4 tool not implemented.",error:"not implemented"};
  }}
