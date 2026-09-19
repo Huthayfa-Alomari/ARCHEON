@@ -5,6 +5,22 @@ export type ReasoningEffort = "low" | "medium" | "high" | "xhigh" | "max";
 export type RoutingMode = "single" | "auto" | "quality" | "economy" | "china" | "free" | "local";
 export type CouncilMode = "off" | "auto" | "always" | "manual";
 
+function credentialEnv(value: string | undefined) {
+  const v=(value||"").trim();
+  if(!v) return "";
+  const normalized=v.toLowerCase();
+  if (
+    normalized.startsWith("your_api") ||
+    normalized.startsWith("your-api") ||
+    normalized.startsWith("replace_me") ||
+    normalized.startsWith("changeme") ||
+    normalized.includes("example_key") ||
+    normalized.includes("example-key") ||
+    normalized === "sk-your-key-here"
+  ) return "";
+  return v;
+}
+
 function boolEnv(value: string | undefined, fallback = false) {
   if (value == null) return fallback;
   return ["1", "true", "yes", "on"].includes(value.toLowerCase());
@@ -59,7 +75,7 @@ export const jarvisConfig = {
   model: process.env.JARVIS_LLM_MODEL || defaultModel,
   modelFallbacks: (process.env.JARVIS_LLM_FALLBACKS || "").split(",").map((v) => v.trim()).filter(Boolean),
   reasoningEffort: reasoningEnv(process.env.JARVIS_REASONING_EFFORT),
-  apiKey: process.env.JARVIS_LLM_API_KEY || "",
+  apiKey: credentialEnv(process.env.JARVIS_LLM_API_KEY),
 
   // Multi-model council / debate. maxModels=0 means every configured route.
   councilMode: councilEnv(process.env.JARVIS_COUNCIL_MODE),
@@ -70,11 +86,16 @@ export const jarvisConfig = {
   councilCritiqueRound: boolEnv(process.env.JARVIS_COUNCIL_CRITIQUE_ROUND, true),
 
   // Multi-provider model router credentials. All are optional.
-  openaiApiKey: process.env.OPENAI_API_KEY || "",
-  deepseekApiKey: process.env.DEEPSEEK_API_KEY || "",
-  alibabaApiKey: process.env.DASHSCOPE_API_KEY || process.env.ALIBABA_MODEL_STUDIO_API_KEY || "",
+  openaiApiKey: credentialEnv(process.env.OPENAI_API_KEY),
+  openaiModels: {
+    sol: (process.env.OPENAI_MODEL_SOL || "gpt-5.6-sol").trim(),
+    terra: (process.env.OPENAI_MODEL_TERRA || "gpt-5.6-terra").trim(),
+    luna: (process.env.OPENAI_MODEL_LUNA || "gpt-5.6-luna").trim(),
+  },
+  deepseekApiKey: credentialEnv(process.env.DEEPSEEK_API_KEY),
+  alibabaApiKey: credentialEnv(process.env.DASHSCOPE_API_KEY || process.env.ALIBABA_MODEL_STUDIO_API_KEY),
   alibabaBaseUrl: process.env.ALIBABA_MODEL_STUDIO_BASE_URL || "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
-  openrouterApiKey: process.env.OPENROUTER_API_KEY || "",
+  openrouterApiKey: credentialEnv(process.env.OPENROUTER_API_KEY),
   openrouterBaseUrl: process.env.OPENROUTER_BASE_URL || "https://openrouter.ai/api/v1",
   ollamaBaseUrl: process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434",
   ollamaModels: (process.env.JARVIS_OLLAMA_MODELS || process.env.OLLAMA_MODELS || "").split(",").map((v) => v.trim()).filter(Boolean),
