@@ -1,0 +1,3 @@
+import { listDevices,enqueueCommand } from "../device-mesh";
+export async function meshWorkers(){const devices=await listDevices();return devices.filter(d=>d.status==="online").map(d=>({id:d.id,name:d.name,kind:d.kind,capabilities:d.capabilities,platform:d.platform}));}
+export async function dispatchMeshWork(args:{deviceId:string;jobType:string;payload?:Record<string,unknown>;requiredCapability:string;ttlSeconds?:number}){if(!args.jobType?.trim()||!args.requiredCapability?.trim())throw new Error("jobType and requiredCapability required");return enqueueCommand({deviceId:args.deviceId,type:`work.${args.jobType}`,payload:args.payload||{},requiredCapability:args.requiredCapability,ttlSeconds:args.ttlSeconds});}
