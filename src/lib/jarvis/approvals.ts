@@ -25,6 +25,8 @@ async function writeAll(approvals: PendingApproval[]) {
   await fs.writeFile(target, JSON.stringify({ approvals }, null, 2), "utf8");
 }
 
+export async function listPendingApprovals() { return readAll(); }
+
 export async function createApproval(toolCall: ToolCall, userMessage: string, preview?: string) {
   const approvals = await readAll();
   const createdAt = new Date();
