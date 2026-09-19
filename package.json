@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "dev:lan": "next dev --hostname 0.0.0.0",
     "start:lan": "next start --hostname 0.0.0.0",
-    "cognition:worker": "tsx scripts/cognition-worker.ts"
+    "cognition:worker": "node --env-file=.env.local --import tsx scripts/cognition-worker.ts"
   },
   "dependencies": {
     "next": "16.3.3",
