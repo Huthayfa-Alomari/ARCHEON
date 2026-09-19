@@ -1,0 +1,302 @@
+[
+  {
+    "id": "orch_902a83f1-bb97-4c60-8245-d754fd3722bc",
+    "createdAt": "2026-09-19T17:20:22.234Z",
+    "seed": "v13|final-matrix",
+    "hypothesisIds": [
+      "hyp_812d442e-25d5-4358-b056-eb99162db3b1",
+      "hyp_2ac6c771-4c21-45ee-929c-b9a80e7d2582",
+      "hyp_7c42df29-2ab6-4f42-bdb4-7880698844dc",
+      "hyp_b62ff356-07f0-48af-a951-bc3d62a1745c",
+      "hyp_f86c109c-dec5-4aff-974e-7e0b3c3cb3ae",
+      "hyp_4c2c812b-10bb-44f2-a5c7-3c41d915b28c",
+      "hyp_dbd3a9e2-9696-43b9-aa01-b961c9559001",
+      "hyp_ac1f8fea-1749-470d-a9e3-21f5fcb31154",
+      "hyp_54788940-a767-4992-8798-9a194e689d28",
+      "hyp_4c79d088-c7c6-4729-ace0-eac590ab2c16",
+      "hyp_fc682c73-962e-42c6-a05f-3ac77f686661",
+      "hyp_f541fa48-ab81-4c0c-b8e0-d4a946ba0223",
+      "hyp_e8b39c22-9b08-4457-9ad4-e9a68e3d819a",
+      "hyp_8b562935-89cc-42c5-8365-224c8b66abee",
+      "hyp_cc46871d-c2a1-430c-bffe-a54ad9694c75",
+      "hyp_40b20796-869e-4feb-aca6-3c8b66700c21",
+      "hyp_eb7df486-e64b-4200-ab24-1d8f8ccc3435",
+      "hyp_e1080599-80e9-4e5f-864f-4de90aca2915",
+      "hyp_d574c421-48b9-42d9-9908-0db0c956e0df",
+      "hyp_5b7ea8ee-3189-43ff-9f0a-2714bb8a2867",
+      "hyp_c11345bc-55fe-41dc-a489-e1f23bbff757",
+      "hyp_62be9b83-5fa3-477e-9f86-6c60f21021e4",
+      "hyp_b939dd92-b8f3-4d3c-a199-f70b1b2fc83a",
+      "hyp_1be16077-0784-4b61-ad00-d4f4ee9d6239",
+      "hyp_f1b53204-adb9-4bcc-b123-f8afe1c494b1",
+      "hyp_78439eb3-7e63-4cd8-b662-606a3c991e85",
+      "hyp_f89e9356-0208-489d-8d7f-79f19129ce0d"
+    ],
+    "datasets": [
+      {
+        "csvPath": "data/XAU.csv",
+        "symbol": "XAUUSD",
+        "timeframe": "M15"
+      }
+    ],
+    "costs": [
+      {
+        "name": "base",
+        "spreadBps": 2,
+        "commissionBps": 1,
+        "slippageBps": 1
+      }
+    ],
+    "maxRuns": 3,
+    "completed": 3,
+    "failed": 0,
+    "results": [
+      {
+        "hypothesisId": "hyp_812d442e-25d5-4358-b056-eb99162db3b1",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_12cbe5e2-1533-453a-ae88-432bb075fc97",
+        "passed": false,
+        "robustness": 0.1563169529938469,
+        "profitFactor": 0.10136816160039652,
+        "maxDrawdownPct": 10.183878995837937
+      },
+      {
+        "hypothesisId": "hyp_2ac6c771-4c21-45ee-929c-b9a80e7d2582",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_fe7b8849-5e16-46bf-bb96-ba8a9e150f60",
+        "passed": false,
+        "robustness": 0.3839368826005757,
+        "profitFactor": 1.223115760355774,
+        "maxDrawdownPct": 3.660057856603041
+      },
+      {
+        "hypothesisId": "hyp_7c42df29-2ab6-4f42-bdb4-7880698844dc",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_747d869c-08b2-4a5e-b34a-007f6a5569fd",
+        "passed": false,
+        "robustness": 0.11455438411022226,
+        "profitFactor": 0,
+        "maxDrawdownPct": 7.27017596850793
+      }
+    ]
+  },
+  {
+    "id": "orch_35f64080-a5a4-4bf8-a0f4-d5a86481e2ca",
+    "createdAt": "2026-09-19T17:20:21.736Z",
+    "seed": "v13|G1|matrix",
+    "hypothesisIds": [
+      "hyp_e8b39c22-9b08-4457-9ad4-e9a68e3d819a",
+      "hyp_8b562935-89cc-42c5-8365-224c8b66abee",
+      "hyp_cc46871d-c2a1-430c-bffe-a54ad9694c75",
+      "hyp_40b20796-869e-4feb-aca6-3c8b66700c21",
+      "hyp_eb7df486-e64b-4200-ab24-1d8f8ccc3435",
+      "hyp_e1080599-80e9-4e5f-864f-4de90aca2915",
+      "hyp_d574c421-48b9-42d9-9908-0db0c956e0df",
+      "hyp_5b7ea8ee-3189-43ff-9f0a-2714bb8a2867",
+      "hyp_c11345bc-55fe-41dc-a489-e1f23bbff757",
+      "hyp_62be9b83-5fa3-477e-9f86-6c60f21021e4",
+      "hyp_b939dd92-b8f3-4d3c-a199-f70b1b2fc83a",
+      "hyp_1be16077-0784-4b61-ad00-d4f4ee9d6239",
+      "hyp_f1b53204-adb9-4bcc-b123-f8afe1c494b1",
+      "hyp_78439eb3-7e63-4cd8-b662-606a3c991e85",
+      "hyp_f89e9356-0208-489d-8d7f-79f19129ce0d"
+    ],
+    "datasets": [
+      {
+        "csvPath": "data/XAU.csv",
+        "symbol": "XAUUSD",
+        "timeframe": "M15"
+      }
+    ],
+    "costs": [
+      {
+        "name": "base",
+        "spreadBps": 2,
+        "commissionBps": 1,
+        "slippageBps": 1
+      }
+    ],
+    "maxRuns": 3,
+    "completed": 3,
+    "failed": 0,
+    "results": [
+      {
+        "hypothesisId": "hyp_e8b39c22-9b08-4457-9ad4-e9a68e3d819a",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_399bf1c0-6b97-4144-a2df-b783c4357a29",
+        "passed": false,
+        "robustness": 0.6072876592000673,
+        "profitFactor": 1.1338696556720858,
+        "maxDrawdownPct": 1.4838649982952277
+      },
+      {
+        "hypothesisId": "hyp_8b562935-89cc-42c5-8365-224c8b66abee",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_3cd10cfc-a640-4943-bdfc-5cbfbf5bae26",
+        "passed": false,
+        "robustness": 0.15651966317165666,
+        "profitFactor": 0.11559417178192041,
+        "maxDrawdownPct": 11.38009902612491
+      },
+      {
+        "hypothesisId": "hyp_cc46871d-c2a1-430c-bffe-a54ad9694c75",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_a21841eb-d932-4591-b9d4-c8dd3a9215c6",
+        "passed": false,
+        "robustness": 0.7540359571122442,
+        "profitFactor": 1.2216330236659878,
+        "maxDrawdownPct": 2.766179246422463
+      }
+    ]
+  },
+  {
+    "id": "orch_adb1697d-39da-4928-9bd3-8f7382064781",
+    "createdAt": "2026-09-19T17:20:21.306Z",
+    "seed": "v13|G0|matrix",
+    "hypothesisIds": [
+      "hyp_f89e9356-0208-489d-8d7f-79f19129ce0d",
+      "hyp_78439eb3-7e63-4cd8-b662-606a3c991e85",
+      "hyp_f1b53204-adb9-4bcc-b123-f8afe1c494b1"
+    ],
+    "datasets": [
+      {
+        "csvPath": "data/XAU.csv",
+        "symbol": "XAUUSD",
+        "timeframe": "M15"
+      }
+    ],
+    "costs": [
+      {
+        "name": "base",
+        "spreadBps": 2,
+        "commissionBps": 1,
+        "slippageBps": 1
+      }
+    ],
+    "maxRuns": 3,
+    "completed": 3,
+    "failed": 0,
+    "results": [
+      {
+        "hypothesisId": "hyp_f89e9356-0208-489d-8d7f-79f19129ce0d",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_b63a0fb1-f6c8-44fc-b3f8-bd92724f22b0",
+        "passed": false,
+        "robustness": 0.7121467477055211,
+        "profitFactor": 1.1588096955788278,
+        "maxDrawdownPct": 1.723486023303095
+      },
+      {
+        "hypothesisId": "hyp_78439eb3-7e63-4cd8-b662-606a3c991e85",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_7fb0b77a-072d-4558-83cb-ea42e427f8ef",
+        "passed": false,
+        "robustness": 0.9897343326361294,
+        "profitFactor": 14.598966949186758,
+        "maxDrawdownPct": 0.8865110182762468
+      },
+      {
+        "hypothesisId": "hyp_f1b53204-adb9-4bcc-b123-f8afe1c494b1",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAU.csv",
+        "costName": "base",
+        "experimentId": "exp_4c08526e-dc88-4464-aa64-b1c09dd09bde",
+        "passed": false,
+        "robustness": 0.10272739916288164,
+        "profitFactor": 0,
+        "maxDrawdownPct": 10.649314524890963
+      }
+    ]
+  },
+  {
+    "id": "orch_548378bd-2f2e-4c3d-ab43-ea2ab4383954",
+    "createdAt": "2026-09-19T17:18:45.402Z",
+    "seed": "factory-smoke",
+    "hypothesisIds": [
+      "hyp_f4a72d9e-3647-4bfa-81f6-eedac194e0f1",
+      "hyp_1dd7ef6f-08b7-46fc-b3f9-bb8c728d4ca1",
+      "hyp_a57d7b7e-f82c-4803-87c2-2c572276c8ed"
+    ],
+    "datasets": [
+      {
+        "csvPath": "data/XAUUSD_M15.csv",
+        "symbol": "XAUUSD",
+        "timeframe": "M15"
+      }
+    ],
+    "costs": [
+      {
+        "name": "base",
+        "spreadBps": 2,
+        "commissionBps": 1,
+        "slippageBps": 1
+      }
+    ],
+    "maxRuns": 3,
+    "completed": 3,
+    "failed": 0,
+    "results": [
+      {
+        "hypothesisId": "hyp_f4a72d9e-3647-4bfa-81f6-eedac194e0f1",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAUUSD_M15.csv",
+        "costName": "base",
+        "experimentId": "exp_afdce1b5-34da-41b6-9e68-d3c6fbdb6987",
+        "passed": false,
+        "robustness": 0.31209253813629695,
+        "profitFactor": 0.5329608302454597,
+        "maxDrawdownPct": 2.9221753937352934
+      },
+      {
+        "hypothesisId": "hyp_1dd7ef6f-08b7-46fc-b3f9-bb8c728d4ca1",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAUUSD_M15.csv",
+        "costName": "base",
+        "experimentId": "exp_53d441dc-3392-4dc3-b8c8-2662772c69c8",
+        "passed": false,
+        "robustness": 0.8257463387017381,
+        "profitFactor": 10.366154886879338,
+        "maxDrawdownPct": 0.5520088328746552
+      },
+      {
+        "hypothesisId": "hyp_a57d7b7e-f82c-4803-87c2-2c572276c8ed",
+        "symbol": "XAUUSD",
+        "timeframe": "M15",
+        "csvPath": "data/XAUUSD_M15.csv",
+        "costName": "base",
+        "experimentId": "exp_e88b8600-53fc-49cc-9ab2-a07114789d69",
+        "passed": false,
+        "robustness": 0.2811416489458566,
+        "profitFactor": 0.43918055033600795,
+        "maxDrawdownPct": 4.048729131081452
+      }
+    ]
+  }
+]
