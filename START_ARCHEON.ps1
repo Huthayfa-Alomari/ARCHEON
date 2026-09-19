@@ -27,20 +27,21 @@ if (-not (Test-Path "node_modules")) {
   npm install
 }
 
-$autoWorkerLine = Select-String -Path ".env.local" -Pattern '^JARVIS_COGNITION_WORKER_AUTOSTART=(.*)
-Write-Host "[ARCHEON v1.5] Device Mesh: listening on LAN interfaces for Android development." -ForegroundColor Green
-Write-Host "[SECURITY] Keep this on a trusted LAN. Do not port-forward the dev server." -ForegroundColor Yellow
-Start-Process "http://localhost:3000"
-npm run dev:lan
- | Select-Object -First 1
-$autoWorker = $autoWorkerLine -and $autoWorkerLine.Matches[0].Groups[1].Value.Trim().ToLower() -in @("1","true","yes","on")
+$autoWorkerLine = Select-String -Path ".env.local" -Pattern '^JARVIS_COGNITION_WORKER_AUTOSTART=(.*)$' | Select-Object -First 1
+$autoWorker = $false
+if ($autoWorkerLine) {
+  $autoValue = $autoWorkerLine.Matches[0].Groups[1].Value.Trim().ToLower()
+  $autoWorker = $autoValue -in @("1","true","yes","on")
+}
+
 if ($autoWorker) {
   Write-Host "[ARCHEON v1.5] Starting bounded cognition worker in a separate PowerShell window..." -ForegroundColor Cyan
-  Start-Process powershell.exe -ArgumentList "-NoExit","-Command","Set-Location '$PSScriptRoot'; npm run cognition:worker"
+  Start-Process powershell.exe -WorkingDirectory $PSScriptRoot -ArgumentList "-NoExit","-Command","npm run cognition:worker"
 }
 
 Write-Host "[ARCHEON v1.5] Desktop UI: http://localhost:3000" -ForegroundColor Green
 Write-Host "[ARCHEON v1.5] Device Mesh: listening on LAN interfaces for Android development." -ForegroundColor Green
 Write-Host "[SECURITY] Keep this on a trusted LAN. Do not port-forward the dev server." -ForegroundColor Yellow
+
 Start-Process "http://localhost:3000"
 npm run dev:lan
