@@ -92,6 +92,13 @@ export async function tryBuiltInTool(message: string): Promise<BuiltInResult> {
   if (/^\/workers$/i.test(text)) return call("core.mesh.workers", {}, "List online distributed Device Mesh workers.");
   if (/^\/evals$/i.test(text)) return call("core.eval.run", {}, "Run ARCHEON core regression evaluations.");
   if (/^\/computer$/i.test(text)) return call("core.computer.status", {}, "Show safe computer-agent capabilities.");
+  if (/^\/cognition$/i.test(text)) return call("core.cognition.authority", {}, "Show autonomous cognition authority and policy.");
+  if (/^\/thoughts$/i.test(text)) return call("core.cognition.queue", { limit: 100, status: "queued" }, "Show prioritized Inner Thought Queue.");
+  if (/^\/beliefs$/i.test(text)) return call("core.belief.list", { limit: 100 }, "Show calibrated belief graph.");
+  if (/^\/think$/i.test(text)) return call("core.cognition.run", {}, "Run one bounded autonomous cognition cycle now.");
+  if (/^\/night$/i.test(text)) return call("core.cognition.idle", {}, "Run one idle/night cognition cycle now.");
+  const autonomy = text.match(/^\/autonomy\s+(on|off)(?:\s+([0-4]))?$/i);
+  if (autonomy) return call("core.cognition.configure", { enabled: autonomy[1].toLowerCase()==="on", level: Number(autonomy[2] || 3) }, "Owner requested autonomous-cognition configuration.");
   if (/^\/security$/i.test(text)) return call("core.security.status", {}, "Show global ARCHEON security state.");
   if (/^\/lockdown$/i.test(text)) return call("core.security.lockdown", { enabled: true, reason: "Owner requested global lockdown" }, "Enable global security lockdown.");
   if (/^\/unlock$/i.test(text)) return call("core.security.lockdown", { enabled: false, reason: "Owner requested lockdown release" }, "Disable global security lockdown.");
