@@ -92,6 +92,14 @@ export async function tryBuiltInTool(message: string): Promise<BuiltInResult> {
   if (/^\/workers$/i.test(text)) return call("core.mesh.workers", {}, "List online distributed Device Mesh workers.");
   if (/^\/evals$/i.test(text)) return call("core.eval.run", {}, "Run ARCHEON core regression evaluations.");
   if (/^\/computer$/i.test(text)) return call("core.computer.status", {}, "Show safe computer-agent capabilities.");
+  if (/^\/security$/i.test(text)) return call("core.security.status", {}, "Show global ARCHEON security state.");
+  if (/^\/lockdown$/i.test(text)) return call("core.security.lockdown", { enabled: true, reason: "Owner requested global lockdown" }, "Enable global security lockdown.");
+  if (/^\/unlock$/i.test(text)) return call("core.security.lockdown", { enabled: false, reason: "Owner requested lockdown release" }, "Disable global security lockdown.");
+  const claims = text.match(/^\/claims\s+(.+)$/i);
+  if (claims) return call("core.claim.search", { query: claims[1].trim(), limit: 20 }, "Search the research claim graph.");
+  const mem2 = text.match(/^\/memory2\s+(.+)$/i);
+  if (mem2) return call("core.memory.search", { query: mem2[1].trim(), limit: 15 }, "Search typed Memory 2.0.");
+
   if (/^\/research\s+stats$/i.test(text)) return call("research.stats", {}, "Show Research Lab statistics.");
   if (/^\/factory\s+status$/i.test(text)) return call("research.factory.status", {}, "Show Autonomous Research Factory queue.");
   const factoryRun = text.match(/^\/factory\s+run(?:\s+(\d+))?$/i);
