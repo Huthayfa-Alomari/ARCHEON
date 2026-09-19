@@ -1,10 +1,17 @@
-# ARCHEON v1.3
+# ARCHEON v1.4
 
 **Autonomous Research, Cognition & Hyper-Execution Operating Network**
 
 ARCHEON is an experimental agent operating system that combines multi-model reasoning, governed tool use, persistent research workflows, device connectivity, web reach, quantitative strategy research, MT5 integration, engineering computation, biomedical evidence retrieval, and auditable execution.
 
 > **Core rule:** intelligence is not authority. Models may propose actions; permission, risk, approval, and platform boundaries decide whether an action is allowed.
+
+
+## v1.4 Mission Control
+
+ARCHEON now adds persistent Mission DAGs, specialized Agent Teams, typed Memory 2.0, an Eval Harness, bounded Docker sandbox execution, Plugin/MCP registry, self-improvement experiment planning, a Command Center/Approval Inbox, distributed Device Mesh work dispatch, global lockdown enforcement, evidence Claim Graphs, Book Intelligence, portfolio/microstructure analytics, Coding/Vision/IoT workflow foundations, and an optional browser wake-word.
+
+See `ARCHEON_V14.md` for the v1.4 subsystem details.
 
 ## Major capabilities
 
@@ -149,7 +156,7 @@ ARCHEON intentionally does **not** equate model intelligence with unrestricted m
 
 ```powershell
 Copy-Item .env.example .env.local
-.\SETUP_V13.ps1
+.\SETUP_V14.ps1
 npm install
 npm run dev:lan
 ```
@@ -222,7 +229,7 @@ See the versioned documentation files for the complete subsystem details.
 
 ## Validation status
 
-The v1.3 build previously passed syntax-level validation across the TypeScript/TSX source set and Python `py_compile` for the MT5 bridge. Research Factory, Strategy Genome, regime segmentation, and ICT/SMC detector smoke tests were also exercised with bounded test datasets.
+The v1.3 baseline previously passed syntax-level validation across the TypeScript/TSX source set and Python `py_compile` for the MT5 bridge. Research Factory, Strategy Genome, regime segmentation, and ICT/SMC detector smoke tests were also exercised with bounded test datasets.
 
 A clean machine should still run:
 
