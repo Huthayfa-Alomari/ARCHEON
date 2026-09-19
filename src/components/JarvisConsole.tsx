@@ -91,6 +91,7 @@ export function JarvisConsole() {
   const [wakeEnabled, setWakeEnabled] = useState(false);
   const [status, setStatus] = useState<Status | null>(null);
   const recognition = useRef<RecognitionLike | null>(null);
+  const wakeEnabledRef = useRef(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const speechSupported = useMemo(() => {
@@ -124,6 +125,7 @@ export function JarvisConsole() {
     if (wakeEnabled && recognition.current) {
       recognition.current.stop();
       recognition.current = null;
+      wakeEnabledRef.current = false;
       setWakeEnabled(false);
       setListening(false);
       return;
@@ -144,12 +146,13 @@ export function JarvisConsole() {
       }
     };
     r.onend = () => {
-      if (wakeEnabled) {
+      if (wakeEnabledRef.current) {
         try { r.start(); } catch { /* browser may require a user gesture */ }
       }
     };
     r.onerror = () => setListening(false);
     recognition.current = r;
+    wakeEnabledRef.current = true;
     setWakeEnabled(true);
     setListening(true);
     r.start();
