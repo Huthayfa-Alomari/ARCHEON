@@ -64,7 +64,7 @@ function signal(spec: StrategySpec, bars: Bar[], i: number): -1|0|1 {
     const components=(spec.components||[]).slice(0,8);
     if(!components.length)return 0;
     const votes=components.map((component)=>signal(component,bars,i));
-    const score=votes.reduce((a,b)=>a+b,0);
+    const score=votes.reduce<number>((a,b)=>a+b,0);
     const threshold=Math.max(1,Math.min(components.length,Math.round(spec.voteThreshold||Math.ceil(components.length/2))));
     if(score>=threshold)s=1; else if(score<=-threshold)s=-1;
   }
