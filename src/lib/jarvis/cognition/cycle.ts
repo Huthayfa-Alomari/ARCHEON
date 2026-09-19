@@ -11,10 +11,16 @@ async function history():Promise<CycleRecord[]>{try{return JSON.parse(await fs.r
 
 export async function runCognitionCycle(args:{idle?:boolean}={}){
  const authority=await authorityState(),security=await securityState();if(!authority.enabled)return{ran:false,reason:"Autonomy is disabled.",authority,policy:authorityPolicy(authority.level)};if(security.lockdown)return{ran:false,reason:"Global lockdown is active.",authority};
- const generated=[...(await curiosityScan()),...(await reflectionScan()),...(await goalScan()),...(args.idle?await maintenanceScan():[])];
+ if(authority.level===0)return{ran:false,reason:"Autonomy level 0 is reactive-only.",authority};
+ const generated=[];
+ generated.push(...await reflectionScan());
+ if(args.idle||authority.level>=1)generated.push(...await maintenanceScan());
+ if(authority.level>=2){generated.push(...await curiosityScan());generated.push(...await goalScan());}
  const queue=await listThoughts(authority.maxActionsPerCycle,"queued");let resolved=0,blocked=0,researchJobs=0;const notes:string[]=[];
  for(const t of queue){
    if(t.risk>.35&&authority.level<4){await resolveThought(t.id,"blocked","Risk exceeds current autonomy level.");blocked++;continue}
+   if(authority.level===1&&!["reflection","maintenance"].includes(t.kind)){blocked++;continue}
+   if(authority.level===2&&t.kind==="research"){blocked++;continue}
    if(t.kind==="research"&&authority.level>=3&&authority.allowResearchQueue&&researchJobs<authority.maxResearchJobsPerCycle){
      await enqueueFactoryJob("portfolio",{minCoverage:1,minPassRate:.6,challengers:8});researchJobs++;await resolveThought(t.id,"resolved","Queued a bounded research portfolio review job.");resolved++;notes.push(`${t.id}: queued bounded research review`);continue;
    }
