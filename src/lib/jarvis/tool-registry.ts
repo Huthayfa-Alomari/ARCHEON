@@ -22,6 +22,7 @@ import { executeDomainTool } from "./domains/tools";
 import { telegramSend } from "./telegram";
 import { executeReachTool } from "./reach/tools";
 import { traceEvent } from "./tracing";
+import { executeCoreTool } from "./core/tools";
 
 const execFileAsync = promisify(execFile);
 
@@ -33,6 +34,23 @@ export type ToolDefinition = {
 };
 
 export const TOOL_DEFINITIONS: ToolDefinition[] = [
+  { name: "core.mission.create", risk: "approval", description: "Create a persistent mission with objective, constraints, success metrics and a validated task DAG.", args: '{"title":"...","objective":"...","tasks":[{"title":"...","dependsOn":[0]}]}' },
+  { name: "core.mission.list", risk: "read", description: "List persistent ARCHEON missions.", args: '{"limit":50}' },
+  { name: "core.mission.status", risk: "read", description: "Show mission progress and dependency-ready tasks.", args: '{"id":"mission_..."}' },
+  { name: "core.mission.task.update", risk: "approval", description: "Update a mission task state; dependency gates are enforced.", args: '{"missionId":"...","taskId":"...","status":"running|blocked|done|failed","result":"optional"}' },
+  { name: "core.memory.remember", risk: "approval", description: "Persist a typed Memory 2.0 item: episodic, semantic, procedural, project, preference, failure or evidence.", args: '{"kind":"semantic","content":"...","tags":["..."],"confidence":0.8}' },
+  { name: "core.memory.search", risk: "read", description: "Search typed Memory 2.0 with confidence and reinforcement signals.", args: '{"query":"...","limit":12,"kinds":["project"]}' },
+  { name: "core.memory.consolidate", risk: "read", description: "Identify related memory groups that are candidates for later consolidation; does not silently delete memories.", args: '{}' },
+  { name: "core.team.catalog", risk: "read", description: "List specialized ARCHEON agent roles and their default scoped tools.", args: '{}' },
+  { name: "core.team.plan", risk: "read", description: "Build a role/handoff plan for a multi-agent objective without granting extra permissions.", args: '{"objective":"...","roles":["architect","coder","qa"]}' },
+  { name: "core.eval.run", risk: "read", description: "Run deterministic core safety/catalog regression checks.", args: '{}' },
+  { name: "core.sandbox.status", risk: "read", description: "Probe the local Docker sandbox runtime.", args: '{}' },
+  { name: "core.sandbox.run", risk: "approval", description: "Run bounded Python or Node code inside a no-network, memory/CPU/PID-limited read-only Docker sandbox.", args: '{"language":"python|node","code":"...","timeoutSeconds":20}' },
+  { name: "core.plugins.list", risk: "read", description: "List registered local/MCP/HTTPS plugin manifests and enabled state.", args: '{}' },
+  { name: "core.plugins.register", risk: "approval", description: "Register a plugin manifest; registration never auto-enables it.", args: '{"name":"...","version":"1.0","description":"...","transport":"mcp|http|local","permissions":[]}' },
+  { name: "core.plugins.enable", risk: "approval", description: "Enable or disable a registered plugin after owner approval.", args: '{"id":"plugin_...","enabled":true}' },
+  { name: "core.selfImprove.propose", risk: "read", description: "Generate a measured self-improvement experiment plan. Auto-merge is always false.", args: '{"problem":"...","metric":"...","baseline":0.5,"target":0.8,"files":[]}' },
+  { name: "core.quant.robustness", risk: "read", description: "Calculate Probabilistic Sharpe Ratio and an approximate multiple-testing-deflated Sharpe warning from trade/period returns.", args: '{"returns":[0.01,-0.005,0.008],"benchmarkSharpe":0,"trials":100}' },
   { name: "reach.doctor", risk: "read", description: "Probe JARVIS internet capability channels and choose the first healthy backend for each channel.", args: "{}" },
   { name: "reach.route", risk: "read", description: "Route a URL to the matching Reach channel and ordered backend candidates.", args: '{"url":"https://..."}' },
   { name: "reach.agentReach.doctor", risk: "read", description: "Run Agent-Reach doctor --json when its CLI is installed.", args: "{}" },
@@ -703,7 +721,8 @@ export async function executeTool(call: ToolCall): Promise<ToolExecutionResult> 
   await traceEvent({kind:"tool.start",tool:call.tool,status:"running",meta:{reason:call.reason?.slice(0,300)}});
   try {
     let result: ToolExecutionResult;
-    if (call.tool.startsWith("reach.")) result = await executeReachTool(call);
+    if (call.tool.startsWith("core.")) result = await executeCoreTool(call);
+    else if (call.tool.startsWith("reach.")) result = await executeReachTool(call);
     else if (call.tool.startsWith("research.")) result = await executeResearchTool(call);
     else if (call.tool.startsWith("trading.")) result = await executeTradingTool(call);
     else if (call.tool.startsWith("domain.")) result = await executeDomainTool(call);
