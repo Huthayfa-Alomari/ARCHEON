@@ -73,12 +73,12 @@ declare global {
 const intro: Message = {
   id: "intro",
   role: "assistant",
-  content: "ARCHEON Core v1.3 online.\nMulti-model council + cross-examination + arbiter + performance learning ready. جرّب /council status أو اسأل أي سؤال.",
+  content: "ARCHEON Core v1.4 online.\nMission Control + Agent Teams + Memory 2.0 + Research Factory + Device Mesh ready. جرّب /command أو /missions.",
   at: new Date().toISOString(),
   source: "core",
 };
 
-const quickCommands = ["/mesh", "/devices", "/pair Android-Phone", "/health heart_rate", "/browser status", "/council status"];
+const quickCommands = ["/command", "/missions", "/approvals", "/factory status", "/mesh", "/council status"];
 
 export function JarvisConsole() {
   const [messages, setMessages] = useState<Message[]>([intro]);
@@ -88,6 +88,7 @@ export function JarvisConsole() {
   const [approval, setApproval] = useState<AgentApproval | null>(null);
   const [listening, setListening] = useState(false);
   const [speak, setSpeak] = useState(true);
+  const [wakeEnabled, setWakeEnabled] = useState(false);
   const [status, setStatus] = useState<Status | null>(null);
   const recognition = useRef<RecognitionLike | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -116,6 +117,42 @@ export function JarvisConsole() {
     utterance.lang = "ar-JO";
     utterance.rate = 1;
     window.speechSynthesis.speak(utterance);
+  }
+
+  function toggleWakeWord() {
+    if (!speechSupported) return;
+    if (wakeEnabled && recognition.current) {
+      recognition.current.stop();
+      recognition.current = null;
+      setWakeEnabled(false);
+      setListening(false);
+      return;
+    }
+    const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Ctor) return;
+    const r = new Ctor();
+    r.lang = "ar-JO";
+    r.interimResults = false;
+    r.continuous = true;
+    r.onresult = (event) => {
+      const heard = (event.results?.[0]?.[0]?.transcript || "").trim();
+      const normalized = heard.toLowerCase();
+      if (normalized.startsWith("archeon") || normalized.startsWith("اركيون") || normalized.startsWith("أركيون")) {
+        const command = heard.replace(/^(archeon|اركيون|أركيون)[,، ]*/i, "").trim();
+        if (command) void sendText(command);
+        else setInput("");
+      }
+    };
+    r.onend = () => {
+      if (wakeEnabled) {
+        try { r.start(); } catch { /* browser may require a user gesture */ }
+      }
+    };
+    r.onerror = () => setListening(false);
+    recognition.current = r;
+    setWakeEnabled(true);
+    setListening(true);
+    r.start();
   }
 
   function toggleListening() {
@@ -252,7 +289,7 @@ export function JarvisConsole() {
       <main className="main">
         <header className="topbar">
           <div><strong>PERSONAL COMMAND CENTER</strong><br /><small>Device Mesh • Cognitive Council • Permission Broker • privacy-gated</small></div>
-          <button className="voiceToggle" onClick={() => setSpeak((v) => !v)}>الصوت: {speak ? "ON" : "OFF"}</button>
+          <div style={{display:"flex",gap:8}}><button className="voiceToggle" onClick={toggleWakeWord}>WAKE: {wakeEnabled ? "ARCHEON" : "OFF"}</button><button className="voiceToggle" onClick={() => setSpeak((v) => !v)}>الصوت: {speak ? "ON" : "OFF"}</button></div>
         </header>
 
         <section className="hero">
