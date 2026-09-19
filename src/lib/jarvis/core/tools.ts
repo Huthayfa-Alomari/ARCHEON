@@ -7,6 +7,10 @@ import { sandboxStatus,sandboxRun } from "./sandbox";
 import { listPlugins,registerPlugin,setPluginEnabled } from "./plugins";
 import { proposeImprovement } from "./self-improvement";
 import { quantRobustness } from "./quant-robustness";
+import { commandCenterStatus } from "./command-center";
+import { computerStatus,captureScreenshot } from "./computer";
+import { meshWorkers,dispatchMeshWork } from "./distributed";
+import { listPendingApprovals } from "../approvals";
 const ok=(tool:string,data:unknown):ToolExecutionResult=>({ok:true,tool,summary:JSON.stringify(data,null,2),data});
 export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult>{
  const a=call.args as any;
@@ -28,5 +32,11 @@ export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult
  case"core.plugins.enable":return ok(call.tool,await setPluginEnabled(String(a.id||""),Boolean(a.enabled)));
  case"core.selfImprove.propose":return ok(call.tool,proposeImprovement(a));
  case"core.quant.robustness":return ok(call.tool,quantRobustness(a));
+ case"core.commandCenter.status":return ok(call.tool,await commandCenterStatus());
+ case"core.approvals.list":return ok(call.tool,await listPendingApprovals());
+ case"core.computer.status":return ok(call.tool,await computerStatus());
+ case"core.computer.screenshot":return ok(call.tool,await captureScreenshot());
+ case"core.mesh.workers":return ok(call.tool,await meshWorkers());
+ case"core.mesh.dispatch":return ok(call.tool,await dispatchMeshWork(a));
  default:return{ok:false,tool:call.tool,summary:"Core v1.4 tool not implemented.",error:"not implemented"};
  }}
