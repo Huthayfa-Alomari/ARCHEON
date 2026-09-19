@@ -1,4 +1,31 @@
-# JARVIS Roadmap
+# ARCHEON Roadmap
+
+## v1.4 — Mission Control ✅ foundation
+- Mission DAG + resumable objective state
+- Specialized agent-team roles and scoped handoffs
+- Memory 2.0 typed stores and consolidation candidates
+- Core eval harness + GitHub CI
+- Docker sandbox adapter with quotas/no-network
+- Computer screenshot adapter + wake-word UI
+- Approval Inbox + Command Center aggregation
+- Plugin/MCP registry
+- Distributed Device Mesh work dispatch
+- Global lockdown enforcement
+- Evidence claim graph + book intelligence
+- Portfolio and microstructure analytics
+- Coding, vision and Home Assistant workflow foundations
+
+## v1.5 — Deep autonomy hardening
+- Execute agent-team missions with checkpointed handoff state
+- richer eval datasets and benchmark scoring
+- MCP transport runtime and signed plugin manifests
+- isolated coding worktrees/branches + diff/test benchmark loop
+- distributed Research Factory workers
+- richer market-event and microstructure feeds
+- engineering solver result parsers and unit/dimensional engine
+- biomedical systematic-review/GRADE-style appraisal helpers
+- camera/vision model runtime adapters
+- Home Assistant allowlists + token vault integration
 
 ## v1.3 — COMPLETE
 - Autonomous Research Factory queue/checkpoints
