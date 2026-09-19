@@ -1,0 +1,97 @@
+{
+  "source": "https://github.com/raullenchai/free-llm-api-resources",
+  "syncedAt": "2026-09-19T00:00:00.000Z",
+  "providers": [
+    {
+      "name": "OpenRouter",
+      "url": "https://openrouter.ai",
+      "access": "free",
+      "models": [
+        "qwen/qwen3-coder:free",
+        "qwen/qwen3-next-80b-a3b-instruct:free",
+        "z-ai/glm-4.5-air:free",
+        "minimax/minimax-m2.5:free",
+        "openai/gpt-oss-120b:free",
+        "openai/gpt-oss-20b:free"
+      ],
+      "notes": ["Free-model availability and quotas can change; refresh the catalog before relying on it."]
+    },
+    {
+      "name": "Google AI Studio",
+      "url": "https://aistudio.google.com",
+      "access": "free",
+      "models": ["Gemini 3 Flash", "Gemini 3.1 Flash-Lite", "Gemma 3 27B Instruct"],
+      "notes": ["Free usage limits vary by model and region."]
+    },
+    {
+      "name": "NVIDIA NIM",
+      "url": "https://build.nvidia.com/explore/discover",
+      "access": "free",
+      "models": ["Various open models"],
+      "notes": ["Phone verification may be required."]
+    },
+    {
+      "name": "Vercel AI Gateway",
+      "url": "https://vercel.com/docs/ai-gateway",
+      "access": "free",
+      "models": ["Various routed models"],
+      "notes": ["Monthly gateway credit may be available; verify current terms."]
+    },
+    {
+      "name": "Cerebras",
+      "url": "https://cloud.cerebras.ai/",
+      "access": "free",
+      "models": ["gpt-oss-120b", "Llama 3.1 8B"],
+      "notes": ["Rate limits apply."]
+    },
+    {
+      "name": "Groq",
+      "url": "https://console.groq.com",
+      "access": "free",
+      "models": ["qwen/qwen3-32b", "Llama 3.3 70B", "openai/gpt-oss-120b", "Whisper Large v3"],
+      "notes": ["Per-model rate limits apply."]
+    },
+    {
+      "name": "Cloudflare Workers AI",
+      "url": "https://developers.cloudflare.com/workers-ai/",
+      "access": "free",
+      "models": ["@cf/moonshotai/kimi-k2.5", "@cf/qwen/qwen3-30b-a3b-fp8", "@cf/zai-org/glm-4.7-flash"],
+      "notes": ["Daily neuron allowance applies."]
+    },
+    {
+      "name": "OpenCode Zen",
+      "url": "https://opencode.ai/docs/zen/",
+      "access": "free",
+      "models": ["MiniMax M2.5 Free"],
+      "notes": ["Free models may have provider-specific data-use terms."]
+    },
+    {
+      "name": "Alibaba Cloud (International) Model Studio",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/what-is-model-studio",
+      "access": "trial",
+      "models": ["Qwen models", "qwen3-coder-plus", "qwen3.8-max", "kimi-k3", "glm-5.3", "MiniMax-M2.5"],
+      "notes": ["The referenced catalog lists trial credits; current quotas and regional availability must be verified."]
+    },
+    {
+      "name": "Hyperbolic",
+      "url": "https://app.hyperbolic.ai",
+      "access": "trial",
+      "models": ["DeepSeek V3", "deepseek-ai/deepseek-r1-0528", "qwen/qwen3-coder-480b-a35b-instruct"],
+      "notes": ["Trial credits may change."]
+    },
+    {
+      "name": "SambaNova Cloud",
+      "url": "https://cloud.sambanova.ai",
+      "access": "trial",
+      "models": ["deepseek-ai/DeepSeek-V3.2", "minimaxai/minimax-m2.5", "openai/gpt-oss-120b"],
+      "notes": ["Trial credits and model availability may change."]
+    },
+    {
+      "name": "Scaleway Generative APIs",
+      "url": "https://console.scaleway.com",
+      "access": "trial",
+      "models": ["qwen3-coder-30b-a3b-instruct", "qwen3.5-397b-a17b", "gpt-oss-120b"],
+      "notes": ["Free-token promotions may change."]
+    }
+  ]
+}
