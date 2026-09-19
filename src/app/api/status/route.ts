@@ -19,7 +19,7 @@ export async function GET() {
   const router = modelRouterStatus();
   return NextResponse.json({
     ok: true,
-    version: "0.7.0",
+    version: "1.4.0",
     provider: jarvisConfig.provider,
     model: jarvisConfig.model || null,
     routingMode: jarvisConfig.routingMode,
@@ -54,7 +54,7 @@ export async function GET() {
       "free-llm-resource-catalog", "provider-failover", "task-aware-routing", "cost-aware-routing", "local-model-routing",
       "high-reasoning", "chat", "browser-voice", "explicit-memory", "self-learning-evidence-store", "provenance-retrieval",
       "workspace-read", "workspace-search", "project-index", "project-retrieval", "project-review", "multi-step-agent", "git-read",
-      "approval-gateway", "diff-preview", "approval-gated-patch", "approval-gated-file-create", "patch-backups", "project-checks",
+      "approval-gateway", "approval-inbox", "global-lockdown", "mission-dag", "agent-teams", "memory-v2", "eval-harness", "docker-sandbox", "plugin-registry", "command-center", "computer-agent", "distributed-mesh-workers", "wake-word", "claim-graph", "book-intelligence", "portfolio-analytics", "microstructure-analytics", "coding-workflow", "vision-pipeline", "iot-planner", "diff-preview", "approval-gated-patch", "approval-gated-file-create", "patch-backups", "project-checks",
       "github-read", "supabase-read", "public-api-catalog", "safe-internet-fetch", "api-skill-factory", "audit-log", "secret-file-blocking",
     ],
   });
