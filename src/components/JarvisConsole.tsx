@@ -73,12 +73,12 @@ declare global {
 const intro: Message = {
   id: "intro",
   role: "assistant",
-  content: "ARCHEON Core v1.4 online.\nMission Control + Agent Teams + Memory 2.0 + Research Factory + Device Mesh ready. جرّب /command أو /missions.",
+  content: "ARCHEON Core v1.5 online.\nAutonomous Cognition + Mission Control + Agent Teams + Research Factory + Device Mesh ready. جرّب /command أو /missions.",
   at: new Date().toISOString(),
   source: "core",
 };
 
-const quickCommands = ["/command", "/missions", "/approvals", "/factory status", "/mesh", "/council status"];
+const quickCommands = ["/command", "/cognition", "/thoughts", "/beliefs", "/think", "/security"];
 
 export function JarvisConsole() {
   const [messages, setMessages] = useState<Message[]>([intro]);
