@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JARVIS Companion</string>
+    <string name="health_rationale">JARVIS reads only the Health Connect data types you approve, encrypts them in the desktop Health Vault, and does not place them in general AI memory.</string>
+</resources>
