@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "note": "Curated historical trading/market books. Rights status can vary by jurisdiction; verify before ingesting outside Project Gutenberg's stated U.S. public-domain status.",
+  "books": [
+    {"id":"gutenberg-59518","title":"The Theory of Stock Exchange Speculation","author":"Arthur Crump","year":1887,"url":"https://www.gutenberg.org/ebooks/59518.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/59518","license":"Project Gutenberg; public domain in the USA","tags":["speculation","risk","discipline","market-structure-history"]},
+    {"id":"gutenberg-26841","title":"Successful Stock Speculation","author":"John James Butler","year":1922,"url":"https://www.gutenberg.org/ebooks/26841.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/26841","license":"Project Gutenberg; public domain in the USA","tags":["speculation","risk","fundamentals","market-history"]},
+    {"id":"gutenberg-73647","title":"The Psychology of Speculation","author":"Henry Howard Harper","year":1926,"url":"https://www.gutenberg.org/ebooks/73647.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/73647","license":"Project Gutenberg; public domain in the USA","tags":["trading-psychology","behavior","speculation"]},
+    {"id":"gutenberg-70377","title":"Fifty Years in Wall Street","author":"Henry Clews","year":1908,"url":"https://www.gutenberg.org/ebooks/70377.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/70377","license":"Project Gutenberg; public domain in the USA","tags":["wall-street","market-history","crises","speculation"]},
+    {"id":"gutenberg-60082","title":"The Stock Exchange from Within","author":"William C. Van Antwerp","year":1913,"url":"https://www.gutenberg.org/ebooks/60082.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/60082","license":"Project Gutenberg; public domain in the USA","tags":["exchange","price-discovery","market-structure","regulation"]},
+    {"id":"gutenberg-75687","title":"The Cycles of Speculation","author":"Thomas Gibson","year":1907,"url":"https://www.gutenberg.org/ebooks/75687.txt.utf-8","landing":"https://www.gutenberg.org/ebooks/75687","license":"Project Gutenberg; public domain in the USA","tags":["cycles","speculation","psychology","commodities"]}
+  ]
+}
