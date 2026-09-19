@@ -19,6 +19,9 @@ import { microstructureFeatures } from "../trading/microstructure";
 import { codingWorkflow } from "./coding-agent";
 import { homeAssistantRequest } from "./iot";
 import { visionTask } from "./vision";
+import { eventRiskWindow } from "../trading/events";
+import { convertUnit,dimensionCheck } from "../domains/units";
+import { appraiseEvidence } from "../domains/evidence-appraisal";
 const ok=(tool:string,data:unknown):ToolExecutionResult=>({ok:true,tool,summary:JSON.stringify(data,null,2),data});
 export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult>{
  const a=call.args as any;
@@ -56,5 +59,9 @@ export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult
  case"core.coding.workflow":return ok(call.tool,codingWorkflow(a));
  case"core.iot.plan":return ok(call.tool,homeAssistantRequest(a));
  case"core.vision.plan":return ok(call.tool,visionTask(a));
+ case"core.events.window":return ok(call.tool,eventRiskWindow(a));
+ case"core.units.convert":return ok(call.tool,convertUnit(a));
+ case"core.units.check":return ok(call.tool,dimensionCheck(a));
+ case"core.biomed.appraise":return ok(call.tool,appraiseEvidence(a));
  default:return{ok:false,tool:call.tool,summary:"Core v1.4 tool not implemented.",error:"not implemented"};
  }}
