@@ -29,7 +29,7 @@ export async function tryBuiltInTool(message: string): Promise<BuiltInResult> {
     const totalMb = Math.round(os.totalmem() / 1024 / 1024);
     const stats = await learningStats();
     return { handled: true, response: [
-      "JARVIS Core v1.2 RESEARCH ORCHESTRATOR + REACH SWARM يعمل.",
+      "ARCHEON Core v1.4 MISSION CONTROL + RESEARCH FACTORY يعمل.",
       `النظام: ${os.platform()} ${os.arch()}`,
       `الأنوية المنطقية: ${os.cpus().length}`,
       `الذاكرة الحرة: ${freeMb} MB من ${totalMb} MB`,
@@ -81,6 +81,17 @@ export async function tryBuiltInTool(message: string): Promise<BuiltInResult> {
   if (yt) return call("reach.youtube.transcript", { url: yt[1] }, "Extract YouTube transcript through Reach.");
   const rss = text.match(/^\/rss\s+(https:\/\/\S+)$/i);
   if (rss) return call("reach.rss.read", { url: rss[1], limit: 15 }, "Read RSS/Atom through Reach.");
+  if (/^\/command$/i.test(text)) return call("core.commandCenter.status", {}, "Show ARCHEON command center status.");
+  if (/^\/missions$/i.test(text)) return call("core.mission.list", { limit: 50 }, "List persistent missions.");
+  const missionStatus = text.match(/^\/mission\s+(mission_[\w-]+)$/i);
+  if (missionStatus) return call("core.mission.status", { id: missionStatus[1] }, "Show one mission and ready tasks.");
+  if (/^\/approvals$/i.test(text)) return call("core.approvals.list", {}, "Show pending approval inbox.");
+  if (/^\/team$/i.test(text)) return call("core.team.catalog", {}, "Show specialized ARCHEON agent roles.");
+  if (/^\/sandbox$/i.test(text)) return call("core.sandbox.status", {}, "Check Docker sandbox runtime.");
+  if (/^\/plugins$/i.test(text)) return call("core.plugins.list", {}, "List registered plugins.");
+  if (/^\/workers$/i.test(text)) return call("core.mesh.workers", {}, "List online distributed Device Mesh workers.");
+  if (/^\/evals$/i.test(text)) return call("core.eval.run", {}, "Run ARCHEON core regression evaluations.");
+  if (/^\/computer$/i.test(text)) return call("core.computer.status", {}, "Show safe computer-agent capabilities.");
   if (/^\/research\s+stats$/i.test(text)) return call("research.stats", {}, "Show Research Lab statistics.");
   if (/^\/factory\s+status$/i.test(text)) return call("research.factory.status", {}, "Show Autonomous Research Factory queue.");
   const factoryRun = text.match(/^\/factory\s+run(?:\s+(\d+))?$/i);
