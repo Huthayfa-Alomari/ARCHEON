@@ -22,6 +22,11 @@ import { visionTask } from "./vision";
 import { eventRiskWindow } from "../trading/events";
 import { convertUnit,dimensionCheck } from "../domains/units";
 import { appraiseEvidence } from "../domains/evidence-appraisal";
+import { authorityState,setAuthority,authorityPolicy } from "../cognition/authority";
+import { upsertBelief,listBeliefs,reviseBelief } from "../cognition/beliefs";
+import { enqueueThought,listThoughts,resolveThought } from "../cognition/queue";
+import { runCognitionCycle,cognitionHistory } from "../cognition/cycle";
+import { runIdleCycle } from "../cognition/idle";
 const ok=(tool:string,data:unknown):ToolExecutionResult=>({ok:true,tool,summary:JSON.stringify(data,null,2),data});
 export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult>{
  const a=call.args as any;
@@ -63,5 +68,16 @@ export async function executeCoreTool(call:ToolCall):Promise<ToolExecutionResult
  case"core.units.convert":return ok(call.tool,convertUnit(a));
  case"core.units.check":return ok(call.tool,dimensionCheck(a));
  case"core.biomed.appraise":return ok(call.tool,appraiseEvidence(a));
- default:return{ok:false,tool:call.tool,summary:"Core v1.4 tool not implemented.",error:"not implemented"};
+ case"core.cognition.authority":{const st=await authorityState();return ok(call.tool,{state:st,policy:authorityPolicy(st.level)});}
+ case"core.cognition.configure":return ok(call.tool,await setAuthority(a));
+ case"core.cognition.run":return ok(call.tool,await runCognitionCycle(a));
+ case"core.cognition.idle":return ok(call.tool,await runIdleCycle());
+ case"core.cognition.history":return ok(call.tool,await cognitionHistory(Number(a.limit||50)));
+ case"core.cognition.queue":return ok(call.tool,await listThoughts(Number(a.limit||100),a.status));
+ case"core.cognition.enqueue":return ok(call.tool,await enqueueThought(a));
+ case"core.cognition.resolve":return ok(call.tool,await resolveThought(String(a.id||""),a.status,a.result));
+ case"core.belief.upsert":return ok(call.tool,await upsertBelief(a));
+ case"core.belief.list":return ok(call.tool,await listBeliefs(Number(a.limit||100)));
+ case"core.belief.revise":return ok(call.tool,await reviseBelief(a));
+ default:return{ok:false,tool:call.tool,summary:"Core v1.5 tool not implemented.",error:"not implemented"};
  }}
