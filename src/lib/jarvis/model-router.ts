@@ -39,9 +39,9 @@ function configuredRoutes(): ModelRoute[] {
   const effort = jarvisConfig.reasoningEffort;
 
   if (jarvisConfig.openaiApiKey) {
-    routes.push({ id: "openai:sol", provider: "openai", model: "gpt-5.6-sol", baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 3, qualityWeight: 100, speedWeight: 70, tasks: ["coding", "reasoning", "long-context", "general"], reason: `OpenAI flagship; reasoning=${effort}` });
-    routes.push({ id: "openai:terra", provider: "openai", model: "gpt-5.6-terra", baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 2, qualityWeight: 91, speedWeight: 82, tasks: ["coding", "reasoning", "general", "fast"], reason: "Balanced OpenAI route" });
-    routes.push({ id: "openai:luna", provider: "openai", model: "gpt-5.6-luna", baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 1, qualityWeight: 82, speedWeight: 96, tasks: ["fast", "general"], reason: "Fast/cost-sensitive OpenAI route" });
+    routes.push({ id: "openai:sol", provider: "openai", model: jarvisConfig.openaiModels.sol, baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 3, qualityWeight: 100, speedWeight: 70, tasks: ["coding", "reasoning", "long-context", "general"], reason: `OpenAI flagship; reasoning=${effort}` });
+    routes.push({ id: "openai:terra", provider: "openai", model: jarvisConfig.openaiModels.terra, baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 2, qualityWeight: 91, speedWeight: 82, tasks: ["coding", "reasoning", "general", "fast"], reason: "Balanced OpenAI route" });
+    routes.push({ id: "openai:luna", provider: "openai", model: jarvisConfig.openaiModels.luna, baseUrl: "https://api.openai.com", apiKey: jarvisConfig.openaiApiKey, protocol: "responses", origin: "us", free: false, costClass: 1, qualityWeight: 82, speedWeight: 96, tasks: ["fast", "general"], reason: "Fast/cost-sensitive OpenAI route" });
   }
 
   if (jarvisConfig.deepseekApiKey) {
