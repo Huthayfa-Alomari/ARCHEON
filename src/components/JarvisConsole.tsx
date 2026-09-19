@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
+import { FormEvent, useEffect, useRef, useState, type ChangeEvent } from "react";
 
 type CouncilMeta = {
   sessionId: string;
@@ -89,17 +89,14 @@ export function JarvisConsole() {
   const [listening, setListening] = useState(false);
   const [speak, setSpeak] = useState(true);
   const [wakeEnabled, setWakeEnabled] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(false);
   const [status, setStatus] = useState<Status | null>(null);
   const recognition = useRef<RecognitionLike | null>(null);
   const wakeEnabledRef = useRef(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
-  const speechSupported = useMemo(() => {
-    if (typeof window === "undefined") return false;
-    return Boolean(window.SpeechRecognition || window.webkitSpeechRecognition);
-  }, []);
-
   useEffect(() => {
+    setSpeechSupported(Boolean(window.SpeechRecognition || window.webkitSpeechRecognition));
     fetch("/api/status", { cache: "no-store" }).then((r) => r.json()).then(setStatus).catch(() => setStatus({ ok: false }));
   }, []);
 
